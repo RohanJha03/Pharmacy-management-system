@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../../../services/apiClient";
 import { toast } from "react-toastify";
 
 function VerifyOTP() {
+  const navigate = useNavigate();
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -19,7 +21,7 @@ const handleVerify = async () => {
     );
 
     setTimeout(() => {
-      window.location.href = "/signup";
+      navigate("/signup");
     }, 1500);
 
     return;
@@ -49,7 +51,7 @@ const handleVerify = async () => {
     );
 
     setTimeout(() => {
-      window.location.href = "/login";
+      navigate("/login");
     }, 2000);
 
   } catch (error) {
