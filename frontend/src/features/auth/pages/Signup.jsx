@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../../../services/apiClient";
 import { Eye, EyeOff, Mail, Phone, User } from "lucide-react";
 import { toast } from "react-toastify";
@@ -13,6 +14,7 @@ const PASSWORD_MIN = 6;
 const PASSWORD_MAX = 18;
 
 function Signup() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -154,7 +156,7 @@ function Signup() {
       toast.success(data.message || "OTP sent successfully");
 
       setTimeout(() => {
-        window.location.href = "/verify-otp";
+        navigate("/verify-otp");
       }, 1500);
     } catch (error) {
       console.error(error);
