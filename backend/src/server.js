@@ -71,6 +71,8 @@ app.use(
     origin: [
       "http://localhost:5173",
       process.env.FRONTEND_URL,
+      "https://pharmacy-frontend-lt8h.onrender.com",
+      "https://pharmacy-frontend-lt8h.onrender.com/login",
       "https://pharmacy-management-system-frontend-310t.onrender.com",
       "https://pharmacy-management-system-frontend-310t.onrender.com/login",
     ].filter(Boolean),
