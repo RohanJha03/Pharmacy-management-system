@@ -31,7 +31,6 @@ export const signup = async (req, res, next) => {
     }
 
     // ===== Prevent multiple admins =====
-    /*
     if (role === "admin") {
       const existingAdmin = await User.findOne({ role: "admin" });
       const tempAdminExists = [...tempUsers.values()].some(
@@ -43,7 +42,6 @@ export const signup = async (req, res, next) => {
         });
       }
     }
-    */
 
     // ===== Email validation =====
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
