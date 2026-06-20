@@ -40,7 +40,7 @@ services:
     name: pharmacy-frontend
     rootDir: frontend
     buildCommand: npm install && npm run build
-    staticPublishPath: ./frontend/dist
+    staticPublishPath: ./dist
     headers:
       - path: /*
         name: Cache-Control
