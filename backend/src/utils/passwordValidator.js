@@ -6,5 +6,7 @@ export const validatePassword = (password) => {
 };
 
 export const generateOTP = () => {
-  return Math.floor(100000 + Math.random() * 900000).toString();
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+  console.log(`[SECURITY] Generated OTP: ${otp}`);
+  return otp;
 };
