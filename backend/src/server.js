@@ -70,9 +70,10 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
+      process.env.FRONTEND_URL,
       "https://pharmacy-management-system-frontend-310t.onrender.com",
       "https://pharmacy-management-system-frontend-310t.onrender.com/login",
-    ],
+    ].filter(Boolean),
     credentials: true,
   })
 );
