@@ -1,6 +1,6 @@
 # A Pharmacy Management System
 
-### 🌐 **[Live Link](https://pharmacy-frontend-lt8h.onrender.com/login)**
+### 🌐 **[Live Link](https://pharmacy-frontend-lt8h.onrender.com)**
 
 A full-stack Pharmacy Management System built using the MERN Stack (MongoDB, Express.js, React.js, Node.js) to streamline pharmacy operations, medicine management, customer ordering, and administrative control.
 
