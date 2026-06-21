@@ -2,7 +2,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 import { sidebarConfig } from "../config/sidebarConfig";
 import { useMemo } from "react";
 import Swal from "sweetalert2";
-import { X } from "lucide-react";
+import { X, Pill, LogOut } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
 import { toast } from "react-toastify";
 
@@ -12,7 +12,34 @@ const navigate = useNavigate();
 const { user, logout } = useAuth();
 
   // 🔥 memoized menu
-  const menu = useMemo(() => sidebarConfig[role] || [], [role]);
+  const menu = useMemo(() => {
+    const rawMenu = sidebarConfig[role] || [];
+    if (user?.isGuest) {
+      return [
+        {
+          title: "SHOP",
+          items: [
+            {
+              icon: Pill,
+              label: "Medicines",
+              path: "/dashboard/medicines",
+            }
+          ]
+        },
+        {
+          title: "ACCOUNT",
+          items: [
+            {
+              icon: LogOut,
+              label: "Login / Register",
+              action: "logout",
+            }
+          ]
+        }
+      ];
+    }
+    return rawMenu;
+  }, [role, user]);
 
 const handleClick = async (item) => {
   if (item.action !== "logout") return;

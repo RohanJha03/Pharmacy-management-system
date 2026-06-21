@@ -167,12 +167,12 @@ export default function AppRoutes() {
 
           <Route
             path="/dashboard/profile"
-            element={<Profile />}
+            element={user && !user.isGuest ? <Profile /> : <Navigate to="/login" replace />}
           />
 
           <Route
             path="/dashboard/settings"
-            element={<Settings userInfo={user} />}
+            element={user && !user.isGuest ? <Settings userInfo={user} /> : <Navigate to="/login" replace />}
           />
 
           <Route
@@ -338,13 +338,13 @@ export default function AppRoutes() {
           <Route
             path="/dashboard/review-orders"
             element={
-              role === "customer"
+              role === "customer" && !user?.isGuest
                 ? (
                   <ReviewOrders />
                 )
                 : (
                   <Navigate
-                    to="/dashboard"
+                    to="/login"
                     replace
                   />
                 )
@@ -355,13 +355,13 @@ export default function AppRoutes() {
           <Route
             path="/dashboard/payments"
             element={
-              role === "customer"
+              role === "customer" && !user?.isGuest
                 ? (
                   <Payment />
                 )
                 : (
                   <Navigate
-                    to="/dashboard"
+                    to="/login"
                     replace
                   />
                 )
@@ -372,13 +372,13 @@ export default function AppRoutes() {
           <Route
             path="/dashboard/payment-history"
             element={
-              role === "customer"
+              role === "customer" && !user?.isGuest
                 ? (
                   <PaymentHistory />
                 )
                 : (
                   <Navigate
-                    to="/dashboard"
+                    to="/login"
                     replace
                   />
                 )
@@ -389,11 +389,11 @@ export default function AppRoutes() {
           <Route
             path="/dashboard/track-orders"
             element={
-              role === "customer" ? (
+              role === "customer" && !user?.isGuest ? (
                 <TrackOrders />
               ) : (
                 <Navigate
-                  to="/dashboard"
+                  to="/login"
                   replace
                 />
               )
@@ -404,11 +404,11 @@ export default function AppRoutes() {
           <Route
             path="/dashboard/invoice/:orderId"
             element={
-              role === "customer" ? (
+              role === "customer" && !user?.isGuest ? (
                 <Invoice />
               ) : (
                 <Navigate
-                  to="/dashboard"
+                  to="/login"
                   replace
                 />
               )
@@ -421,12 +421,12 @@ export default function AppRoutes() {
 
           <Route
             path="/dashboard/orders"
-            element={<Orders />}
+            element={user && !user.isGuest ? <Orders /> : <Navigate to="/login" replace />}
           />
 
           <Route
             path="/dashboard/orders/:id"
-            element={<OrderDetails />}
+            element={user && !user.isGuest ? <OrderDetails /> : <Navigate to="/login" replace />}
           />
 
           {/* =========================
