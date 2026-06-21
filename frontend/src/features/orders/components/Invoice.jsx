@@ -221,7 +221,7 @@ const Invoice = ({
 
                 <div className="mt-2 space-y-1">
                   <p className="text-sm text-gray-600">
-                    Noida, Uttar Pradesh
+                    Surat, Gujarat
                   </p>
 
                   <p className="flex items-center gap-2 text-sm text-gray-600">

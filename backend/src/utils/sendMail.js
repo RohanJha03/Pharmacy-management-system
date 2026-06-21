@@ -44,7 +44,8 @@ Valid for 5 minutes.
 
 Regards,
 New Drug Team
-Support: rohanjha328@gmail.com`
+Support: rohanjha328@gmail.com
+Surat, Gujarat`
     );
     console.log("OTP mail sent to:", email);
     return true;
@@ -77,7 +78,8 @@ Thank you for choosing New Drug.
 
 Regards,
 New Drug Team
-Support: rohanjha328@gmail.com`
+Support: rohanjha328@gmail.com
+Surat, Gujarat`
     );
     console.log("Order placed mail sent:", email);
   } catch (error) {
@@ -124,7 +126,8 @@ Status: ${order.status}
 
 Regards,
 New Drug Team
-Support: rohanjha328@gmail.com`
+Support: rohanjha328@gmail.com
+Surat, Gujarat`
     );
     console.log("Order status mail sent:", email);
   } catch (error) {
@@ -170,7 +173,8 @@ Account Status: ${user.status}
 
 Regards,
 New Drug Team
-Support: rohanjha328@gmail.com`
+Support: rohanjha328@gmail.com
+Surat, Gujarat`
     );
     console.log("User status mail sent:", email);
   } catch (error) {
