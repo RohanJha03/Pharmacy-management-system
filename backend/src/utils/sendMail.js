@@ -9,7 +9,7 @@ const sendEmail = async (to, subject, textContent) => {
     },
     body: JSON.stringify({
       sender: {
-        email: process.env.EMAIL_FROM,
+        email: process.env.EMAIL_FROM || "rohanjha328@gmail.com",
         name: "New Drug",
       },
       to: [{ email: to }],
@@ -43,7 +43,8 @@ Your OTP is: ${otp}
 Valid for 5 minutes.
 
 Regards,
-New Drug Team`
+New Drug Team
+Support: rohanjha328@gmail.com`
     );
     console.log("OTP mail sent to:", email);
     return true;
@@ -75,7 +76,8 @@ You will be notified once it is accepted or rejected.
 Thank you for choosing New Drug.
 
 Regards,
-New Drug Team`
+New Drug Team
+Support: rohanjha328@gmail.com`
     );
     console.log("Order placed mail sent:", email);
   } catch (error) {
@@ -121,7 +123,8 @@ Total Amount: ₹${Number(order.grandTotal).toFixed(2)}
 Status: ${order.status}
 
 Regards,
-New Drug Team`
+New Drug Team
+Support: rohanjha328@gmail.com`
     );
     console.log("Order status mail sent:", email);
   } catch (error) {
@@ -166,7 +169,8 @@ ${entry.message}
 Account Status: ${user.status}
 
 Regards,
-New Drug Team`
+New Drug Team
+Support: rohanjha328@gmail.com`
     );
     console.log("User status mail sent:", email);
   } catch (error) {
