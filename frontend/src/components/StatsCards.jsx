@@ -216,11 +216,6 @@ export default function StatsCards({ role = "customer" }) {
                   <p className="text-xl font-semibold text-gray-900">{formatValue(value, card)}</p>
                   <p
                     onClick={() => {
-                      if (user?.isGuest && card.key !== "totalMedicines") {
-                        toast.warning("Please log in or register to access this section!");
-                        navigate("/login");
-                        return;
-                      }
                       navigate(ROUTES[card.key] || "/");
                     }}
                     className={`text-xs mt-1 cursor-pointer hover:underline ${card.linkColor}`}

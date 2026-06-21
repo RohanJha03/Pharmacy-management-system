@@ -21,6 +21,12 @@ const Orders = () => {
   // FETCH ORDERS
   // =========================
   const fetchOrders = async () => {
+    if (user?.isGuest) {
+      setOrders([]);
+      setLoading(false);
+      return;
+    }
+
     try {
       setLoading(true);
 

@@ -209,6 +209,12 @@ export default function ReviewOrders() {
   const handlePlaceOrder =
     async () => {
 
+      if (user?.isGuest) {
+        toast.error("Please log in or register to place your order!");
+        navigate("/login");
+        return;
+      }
+
       try {
 
         setPlacingOrder(true);

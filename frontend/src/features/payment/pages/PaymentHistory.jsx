@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import API from "../../../services/apiClient";
+import { useAuth } from "../../../context/AuthContext";
 
 import {
   FiCreditCard,
@@ -19,6 +20,7 @@ import {
 } from "react-icons/fa";
 
 export default function PaymentHistory() {
+  const { user } = useAuth();
 
   // =========================
   // STATES
@@ -35,6 +37,10 @@ export default function PaymentHistory() {
   useEffect(() => {
 
     const fetchPayments = async () => {
+      if (user?.isGuest) {
+        setPayments([]);
+        return;
+      }
       try {
 
         const { data } =

@@ -44,7 +44,7 @@ Valid for 5 minutes.
 
 Regards,
 New Drug Team
-Support: rohanjha328@gmail.com
+Support: rohanjha328@gmail.com | Phone: 9586613168
 Surat, Gujarat`
     );
     console.log("OTP mail sent to:", email);
@@ -78,7 +78,7 @@ Thank you for choosing New Drug.
 
 Regards,
 New Drug Team
-Support: rohanjha328@gmail.com
+Support: rohanjha328@gmail.com | Phone: 9586613168
 Surat, Gujarat`
     );
     console.log("Order placed mail sent:", email);
@@ -126,7 +126,7 @@ Status: ${order.status}
 
 Regards,
 New Drug Team
-Support: rohanjha328@gmail.com
+Support: rohanjha328@gmail.com | Phone: 9586613168
 Surat, Gujarat`
     );
     console.log("Order status mail sent:", email);
@@ -173,7 +173,7 @@ Account Status: ${user.status}
 
 Regards,
 New Drug Team
-Support: rohanjha328@gmail.com
+Support: rohanjha328@gmail.com | Phone: 9586613168
 Surat, Gujarat`
     );
     console.log("User status mail sent:", email);

@@ -13,33 +13,8 @@ const { user, logout } = useAuth();
 
   // 🔥 memoized menu
   const menu = useMemo(() => {
-    const rawMenu = sidebarConfig[role] || [];
-    if (user?.isGuest) {
-      return [
-        {
-          title: "SHOP",
-          items: [
-            {
-              icon: Pill,
-              label: "Medicines",
-              path: "/dashboard/medicines",
-            }
-          ]
-        },
-        {
-          title: "ACCOUNT",
-          items: [
-            {
-              icon: LogOut,
-              label: "Login / Register",
-              action: "logout",
-            }
-          ]
-        }
-      ];
-    }
-    return rawMenu;
-  }, [role, user]);
+    return sidebarConfig[role] || [];
+  }, [role]);
 
 const handleClick = async (item) => {
   if (item.action !== "logout") return;
@@ -183,12 +158,6 @@ if (result.isConfirmed) {
 
   // 🔥 Close sidebar on mobile when a nav item is clicked
   const handleNavClick = (e, item) => {
-    if (user?.isGuest && (item.path === "/dashboard/review-orders" || item.path === "/dashboard/payment-history" || item.path === "/dashboard/orders" || item.path === "/dashboard/track-orders" || item.path === "/dashboard/profile" || item.path === "/dashboard/settings")) {
-      e.preventDefault();
-      toast.warning("Please log in or register to access this section!");
-      navigate("/login");
-      return;
-    }
     if (item.action === "logout") {
       handleClick(item);
     } else {

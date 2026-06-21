@@ -27,6 +27,10 @@ export default function NotificationBell({ user }) {
   // FETCH — ADMIN / STAFF
   // ===============================
 const fetchAdminStaff = useCallback(async () => {
+  if (user?.isGuest) {
+    setNotifications([]);
+    return;
+  }
   try {
     const [usersRes, ordersRes] = await Promise.all([
       API.get("/admin/users"),
@@ -90,6 +94,10 @@ API.get("/orders"),
   // FETCH — CUSTOMER
   // ===============================
   const fetchCustomer = useCallback(async () => {
+  if (user?.isGuest) {
+    setNotifications([]);
+    return;
+  }
   try {
     const res = await API.get("/orders/my-orders");
 

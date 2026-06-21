@@ -60,12 +60,6 @@ export default function CustomerMedicines() {
   };
 
   const handleAddToCart = (medicine) => {
-    if (user?.isGuest) {
-      toast.warning("Please log in or register to add items to your cart!");
-      navigate("/login");
-      return;
-    }
-
     const qty = Number(cartQty[medicine._id]) || 1;
     if (qty < 1) {
       toast.error("Quantity must be at least 1");
@@ -104,12 +98,6 @@ export default function CustomerMedicines() {
   };
 
   const handleBuyNow = (medicine) => {
-    if (user?.isGuest) {
-      toast.warning("Please log in or register to purchase medicines!");
-      navigate("/login");
-      return;
-    }
-
     // Add to cart
     handleAddToCart(medicine);
     // Redirect to review orders cart checkout page

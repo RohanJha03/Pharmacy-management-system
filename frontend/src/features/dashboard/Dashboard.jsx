@@ -21,9 +21,9 @@ return ( <div className="min-h-screen flex items-center justify-center"> <div cl
 );
 }
 
-// ✅ Not logged in or guest
-if (!user || user.isGuest) {
-return <Navigate to="/login" replace />;
+// ✅ Not logged in
+if (!user) {
+ return <Navigate to="/login" replace />;
 }
 
 const role = user?.role || "customer";

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../../../services/apiClient";
+import { useAuth } from "../../../context/AuthContext";
 import {
   FiPackage, FiCheckCircle, FiClock, FiXCircle, FiTruck, FiDownload,
 } from "react-icons/fi";
@@ -9,10 +10,16 @@ const statusSteps = ["pending", "accepted", "delivered"];
 
 const TrackOrders = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchOrders = async () => {
+    if (user?.isGuest) {
+      setOrders([]);
+      setLoading(false);
+      return;
+    }
     try {
       // ✅ Token nahi — cookie jayegi automatically
       const { data } = await API.get("/orders/my-orders");

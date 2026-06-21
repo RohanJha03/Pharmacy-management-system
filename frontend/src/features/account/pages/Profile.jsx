@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import API from "../../../services/apiClient";
+import { useAuth } from "../../../context/AuthContext";
 
 import AdminProfileView from "../components/profile/AdminProfileView";
 import StaffProfileView from "../components/profile/StaffProfileView";
 import CustomerProfileView from "../components/profile/CustomerProfileView";
 
 export default function Profile() {
+  const { user: authUser } = useAuth();
 
   const [user, setUser] = useState(null);
   const [stats, setStats] = useState({});
@@ -15,11 +17,24 @@ export default function Profile() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-
-    const loadProfile = async () => {
-
-      try {
-        setLoading(true);
+ 
+     const loadProfile = async () => {
+       if (authUser?.isGuest) {
+         setUser(authUser);
+         setStats({
+           totalOrders: 0,
+           totalSpent: 0,
+           rewardPoints: 0,
+           savedAddresses: 0,
+         });
+         setActivities([]);
+         setRecentOrders([]);
+         setLoading(false);
+         return;
+       }
+ 
+       try {
+         setLoading(true);
 
         // ── 1. Fetch logged-in user ──────────────────────────────────────
         const profileRes = await API.get("/users/profile");
