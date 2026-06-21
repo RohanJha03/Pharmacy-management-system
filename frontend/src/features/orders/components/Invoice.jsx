@@ -221,17 +221,17 @@ const Invoice = ({
 
                 <div className="mt-2 space-y-1">
                   <p className="text-sm text-gray-600">
-                    Patna, Bihar
+                    Noida, Uttar Pradesh
                   </p>
 
                   <p className="flex items-center gap-2 text-sm text-gray-600">
                     <Phone size={14} />
-                    9091909190
+                    9586613168
                   </p>
 
                   <p className="flex items-center gap-2 text-sm text-gray-600">
                     <Mail size={14} />
-                    newdrug89@gmail.com
+                    rohanjha328@gmail.com
                   </p>
                 </div>
               </div>
