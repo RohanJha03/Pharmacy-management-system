@@ -67,8 +67,7 @@ import Invoice from "../features/orders/components/Invoice";
 // =========================
 import AdminMedicines from "../features/medicines/pages/AdminMedicines";
 
-import CustomerBilling from
-  "../features/medicines/pages/CustomerBilling";
+import CustomerMedicines from "../features/medicines/pages/CustomerMedicines";
 
 // =========================
 // REPORTS
@@ -323,7 +322,7 @@ export default function AppRoutes() {
             element={
               role === "customer"
                 ? (
-                  <CustomerBilling />
+                  <CustomerMedicines />
                 )
                 : (
                   <Navigate

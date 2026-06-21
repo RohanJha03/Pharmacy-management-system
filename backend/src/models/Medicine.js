@@ -40,6 +40,16 @@ const medicineSchema = new mongoose.Schema(
       type: Date
     },
 
+    image: {
+      type: String,
+      default: ""
+    },
+
+    description: {
+      type: String,
+      default: ""
+    },
+
   },
   { timestamps: true,
     versionKey: false
