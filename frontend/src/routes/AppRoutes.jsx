@@ -108,7 +108,7 @@ export default function AppRoutes() {
         path="/"
         element={
           <Navigate
-            to="/login"
+            to="/dashboard/medicines"
             replace
           />
         }
@@ -116,12 +116,12 @@ export default function AppRoutes() {
 
       <Route
         path="/login"
-        element={<Login />}
+        element={user && !user.isGuest ? <Navigate to="/dashboard" replace /> : <Login />}
       />
 
       <Route
         path="/signup"
-        element={<Signup />}
+        element={user && !user.isGuest ? <Navigate to="/dashboard" replace /> : <Signup />}
       />
 
       <Route

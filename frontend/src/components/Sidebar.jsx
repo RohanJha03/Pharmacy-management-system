@@ -236,10 +236,14 @@ if (result.isConfirmed) {
                     {item.action === "logout" ? (
                       <div
                         onClick={(e) => handleNavClick(e, item)}
-                        className="flex items-center gap-3 px-4 py-3 cursor-pointer rounded-full text-gray-300 hover:bg-red-600 transition"
+                        className={`flex items-center gap-3 px-4 py-3 cursor-pointer rounded-full text-gray-300 transition ${
+                          user?.isGuest ? "hover:bg-green-600" : "hover:bg-red-600"
+                        }`}
                       >
                         <Icon size={18} />
-                        <span className="text-sm">{item.label}</span>
+                        <span className="text-sm">
+                          {user?.isGuest ? "Login / Register" : item.label}
+                        </span>
                       </div>
                     ) : (
                       /* 🔥 NAVLINK (AUTO ACTIVE FIX) */

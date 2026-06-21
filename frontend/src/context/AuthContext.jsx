@@ -20,17 +20,14 @@ const refreshUser = async () => {
     setUser(data.user || data.data || data);
     localStorage.removeItem("isGuestMode");
   } catch (err) {
-    if (localStorage.getItem("isGuestMode") === "true") {
-      setUser({
-        _id: "guest_user_id",
-        name: "Guest User",
-        email: "guest@newdrug.com",
-        role: "customer",
-        isGuest: true
-      });
-    } else {
-      setUser(null);
-    }
+    setUser({
+      _id: "guest_user_id",
+      name: "Guest User",
+      email: "guest@newdrug.com",
+      role: "customer",
+      isGuest: true
+    });
+    localStorage.setItem("isGuestMode", "true");
   }
 };
 
@@ -52,11 +49,17 @@ const refreshUser = async () => {
 
   // ─── LOGOUT ─────────────────────────────────────────────
   const logout = async () => {
-    localStorage.removeItem("isGuestMode");
     try {
       await API.post("/auth/logout"); // server clears the httpOnly cookie
     } catch {}
-    setUser(null);
+    setUser({
+      _id: "guest_user_id",
+      name: "Guest User",
+      email: "guest@newdrug.com",
+      role: "customer",
+      isGuest: true
+    });
+    localStorage.setItem("isGuestMode", "true");
   };
 
   // ─── GUEST LOGIN ─────────────────────────────────────────
