@@ -16,13 +16,21 @@ export const AuthProvider = ({ children }) => {
   // ─── REFRESH USER FROM COOKIE ───────────────────────────
 const refreshUser = async () => {
   try {
-
     const { data } = await API.get("/users/profile");
-
     setUser(data.user || data.data || data);
+    localStorage.removeItem("isGuestMode");
   } catch (err) {
-
-    setUser(null);
+    if (localStorage.getItem("isGuestMode") === "true") {
+      setUser({
+        _id: "guest_user_id",
+        name: "Guest User",
+        email: "guest@newdrug.com",
+        role: "customer",
+        isGuest: true
+      });
+    } else {
+      setUser(null);
+    }
   }
 };
 
@@ -44,10 +52,24 @@ const refreshUser = async () => {
 
   // ─── LOGOUT ─────────────────────────────────────────────
   const logout = async () => {
+    localStorage.removeItem("isGuestMode");
     try {
       await API.post("/auth/logout"); // server clears the httpOnly cookie
     } catch {}
     setUser(null);
+  };
+
+  // ─── GUEST LOGIN ─────────────────────────────────────────
+  const guestLogin = () => {
+    const guestUser = {
+      _id: "guest_user_id",
+      name: "Guest User",
+      email: "guest@newdrug.com",
+      role: "customer",
+      isGuest: true
+    };
+    setUser(guestUser);
+    localStorage.setItem("isGuestMode", "true");
   };
 
   return (
@@ -59,6 +81,7 @@ const refreshUser = async () => {
         login,
         logout,
         refreshUser,
+        guestLogin,
       }}
     >
       {children}

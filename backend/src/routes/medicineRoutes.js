@@ -6,7 +6,7 @@ import { authorizeRoles } from "../middleware/roleMiddleware.js";
 const router = express.Router();
 
 router.post("/", protect, authorizeRoles("admin", "staff"), addMedicine);   
-router.get("/", protect, getAllMedicines);
+router.get("/", getAllMedicines);
 router.put("/:id", protect, authorizeRoles("admin", "staff"), updateMedicine);
 router.delete("/:id", protect, authorizeRoles("admin", "staff"), deleteMedicine);
 

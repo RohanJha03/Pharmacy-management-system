@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import API from "../../../services/apiClient";
 import StatsCards from "../../../components/StatsCards";
 import { toast } from "react-toastify";
+import { useAuth } from "../../../context/AuthContext";
 
 import {
   LineChart, Line, XAxis, YAxis, Tooltip,
@@ -257,11 +258,18 @@ function RecentPaymentsTable({ payments = [], loading, navigate }) {
 // ─── MAIN COMPONENT ────────────────────────────────────────
 export default function CustomerView() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [orders, setOrders] = useState([]);
   const [payments, setPayments] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (user?.isGuest) {
+      setOrders([]);
+      setPayments([]);
+      setLoading(false);
+      return;
+    }
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -278,7 +286,7 @@ export default function CustomerView() {
       }
     };
     fetchData();
-  }, []);
+  }, [user]);
 
   const orderStatusData = Object.entries(
     orders.reduce((acc, o) => {
@@ -290,6 +298,21 @@ export default function CustomerView() {
 
   return (
     <div className="space-y-6">
+      {user?.isGuest && (
+        <div className="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-5 shadow-sm">
+          <h3 className="text-[17px] font-bold text-amber-800">You are browsing as a Guest</h3>
+          <p className="text-sm text-amber-700 mt-1">
+            You can search and select medicines to calculate pricing. To buy medicines, track shipments, or view order history, please log in or create an account.
+          </p>
+          <button
+            onClick={() => navigate("/login")}
+            className="mt-3 px-4 py-2 bg-amber-700 hover:bg-amber-800 text-white font-semibold text-xs rounded-xl shadow transition duration-200"
+          >
+            Log In / Register Now
+          </button>
+        </div>
+      )}
+
       <StatsCards role="customer" />
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">

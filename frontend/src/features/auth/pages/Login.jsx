@@ -10,7 +10,13 @@ import {
 import { useAuth } from "../../../context/AuthContext";
 
 function Login() {
-  const { login } = useAuth();
+  const { login, guestLogin } = useAuth();
+
+  const handleGuestLogin = () => {
+    guestLogin();
+    toast.success("Logged in as Guest! 🚀");
+    navigate("/dashboard", { replace: true });
+  };
 
   const [input, setInput] = useState("");
   const [password, setPassword] =
@@ -189,6 +195,15 @@ toast.success(
           {loading
             ? "Logging in..."
             : "Login"}
+        </button>
+
+        {/* Guest Login Button */}
+        <button
+          type="button"
+          onClick={handleGuestLogin}
+          className="btn btn-outline btn-secondary w-full"
+        >
+          Continue as Guest
         </button>
       </form>
     </div>

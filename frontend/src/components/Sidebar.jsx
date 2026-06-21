@@ -4,6 +4,7 @@ import { useMemo } from "react";
 import Swal from "sweetalert2";
 import { X } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 export default function Sidebar({ role, collapsed, mobileOpen = false, onClose = () => {} }) {
 const navigate = useNavigate();
@@ -154,7 +155,13 @@ if (result.isConfirmed) {
 };
 
   // 🔥 Close sidebar on mobile when a nav item is clicked
-  const handleNavClick = (item) => {
+  const handleNavClick = (e, item) => {
+    if (user?.isGuest && (item.path === "/dashboard/review-orders" || item.path === "/dashboard/payment-history" || item.path === "/dashboard/orders" || item.path === "/dashboard/track-orders" || item.path === "/dashboard/profile" || item.path === "/dashboard/settings")) {
+      e.preventDefault();
+      toast.warning("Please log in or register to access this section!");
+      navigate("/login");
+      return;
+    }
     if (item.action === "logout") {
       handleClick(item);
     } else {
@@ -228,7 +235,7 @@ if (result.isConfirmed) {
                     {/* 🔥 LOGOUT BUTTON */}
                     {item.action === "logout" ? (
                       <div
-                        onClick={() => handleNavClick(item)}
+                        onClick={(e) => handleNavClick(e, item)}
                         className="flex items-center gap-3 px-4 py-3 cursor-pointer rounded-full text-gray-300 hover:bg-red-600 transition"
                       >
                         <Icon size={18} />
@@ -239,7 +246,7 @@ if (result.isConfirmed) {
                       <NavLink
   to={item.path}
   end={item.path === "/dashboard"}   // 🔥 IMPORTANT LINE
-  onClick={() => handleNavClick(item)}
+  onClick={(e) => handleNavClick(e, item)}
   className={({ isActive }) =>
     `flex items-center gap-3 px-4 py-3 rounded-full transition
     ${

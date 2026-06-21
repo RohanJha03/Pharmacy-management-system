@@ -166,6 +166,11 @@ const CustomerBilling = () => {
       );
       return;
     }
+    if (user?.isGuest) {
+      toast.warning("Guest users cannot place orders. Please register or log in first!");
+      navigate("/login");
+      return;
+    }
     try {
       if (userId) {
         localStorage.setItem(

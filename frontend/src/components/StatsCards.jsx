@@ -7,6 +7,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 // ─── ADMIN CARDS ───────────────────────────────────────────
 const ADMIN_CARDS = [
@@ -137,6 +138,25 @@ export default function StatsCards({ role = "customer" }) {
   };
 
   const fetchStats = async () => {
+    if (user?.isGuest) {
+      setData({
+        totalUsers: 0,
+        totalMedicines: 55, // 55 seeded medicines
+        totalOrders: 0,
+        pendingOrders: 0,
+        totalRevenue: 0,
+        completedOrders: 0,
+        reviewOrders: 0,
+        pendingPayments: 0,
+        trackOrder: 0,
+        approvedCustomers: 0
+      });
+      setLastUpdated(
+        new Date().toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" })
+      );
+      setLoading(false);
+      return;
+    }
     setLoading(true);
     setError(null);
     try {
@@ -195,7 +215,14 @@ export default function StatsCards({ role = "customer" }) {
                   <p className="text-xs text-gray-500 uppercase">{card.label}</p>
                   <p className="text-xl font-semibold text-gray-900">{formatValue(value, card)}</p>
                   <p
-                    onClick={() => navigate(ROUTES[card.key] || "/")}
+                    onClick={() => {
+                      if (user?.isGuest && card.key !== "totalMedicines") {
+                        toast.warning("Please log in or register to access this section!");
+                        navigate("/login");
+                        return;
+                      }
+                      navigate(ROUTES[card.key] || "/");
+                    }}
                     className={`text-xs mt-1 cursor-pointer hover:underline ${card.linkColor}`}
                   >
                     {card.linkText} →

@@ -10,6 +10,7 @@ import cookieParser from "cookie-parser";
 import rateLimit from "express-rate-limit";
 import mongoose from "mongoose";
 import connectDB from "./config/db.js";
+import { seedMedicines } from "./utils/seeder.js";
 
 import adminRoutes from "./routes/adminRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
@@ -226,7 +227,8 @@ process.on("uncaughtException", (err) => {
 // ===================================
 
 connectDB()
-  .then(() => {
+  .then(async () => {
+    await seedMedicines();
     app.listen(PORT, () => {
       logger.info(
         `Server running on port ${PORT} (${process.env.NODE_ENV})`
